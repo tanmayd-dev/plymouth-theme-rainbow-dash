@@ -1,0 +1,16 @@
+pkgbase = plymouth-theme-rainbow-dash-git
+	pkgdesc = Animated Rainbow Dash flying Plymouth boot theme (light and dark variants) (git)
+	pkgver = r1.g653d8ba
+	pkgrel = 1
+	url = https://github.com/yeaayy/plymouth-theme-rainbow-dash
+	install = plymouth-theme-rainbow-dash-git.install
+	arch = any
+	license = unknown
+	makedepends = git
+	depends = plymouth
+	provides = plymouth-theme-rainbow-dash
+	conflicts = plymouth-theme-rainbow-dash
+	source = plymouth-theme-rainbow-dash-git::git+https://github.com/yeaayy/plymouth-theme-rainbow-dash.git
+	sha256sums = SKIP
+
+pkgname = plymouth-theme-rainbow-dash-git

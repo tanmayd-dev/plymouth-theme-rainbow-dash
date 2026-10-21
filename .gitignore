@@ -4,3 +4,18 @@
 !files
 !files/*
 !README.MD
+
+# Arch Linux / AUR packaging
+!plymouth-theme-rainbow-dash
+!plymouth-theme-rainbow-dash/*
+plymouth-theme-rainbow-dash/pkg/
+plymouth-theme-rainbow-dash/src/
+plymouth-theme-rainbow-dash/*.pkg.tar.*
+plymouth-theme-rainbow-dash/*.tar.gz
+
+!plymouth-theme-rainbow-dash-git
+!plymouth-theme-rainbow-dash-git/*
+plymouth-theme-rainbow-dash-git/pkg/
+plymouth-theme-rainbow-dash-git/src/
+plymouth-theme-rainbow-dash-git/*.pkg.tar.*
+plymouth-theme-rainbow-dash-git/*.tar.gz

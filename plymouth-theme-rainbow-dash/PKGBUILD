@@ -1,0 +1,31 @@
+# Maintainer: Tanmay Deshpande <work.tanmaydeshpande@gmail.com>
+
+pkgname=plymouth-theme-rainbow-dash
+pkgver=1.0.0
+pkgrel=1
+pkgdesc='Animated Rainbow Dash flying Plymouth boot theme (light and dark variants)'
+arch=('any')
+url='https://github.com/yeaayy/plymouth-theme-rainbow-dash'
+license=('unknown')
+depends=('plymouth')
+install="$pkgname.install"
+# Requires an upstream release tag named v$pkgver.
+source=("$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+    cd "$pkgname-$pkgver"
+
+    install -d "$pkgdir/usr/share/plymouth/themes/rainbow-dash" \
+               "$pkgdir/usr/share/plymouth/themes/rainbow-dash-dark"
+
+    install -m644 files/*.png \
+        "$pkgdir/usr/share/plymouth/themes/rainbow-dash/"
+    install -m644 files/rainbow-dash.plymouth files/rainbow-dash.script \
+        "$pkgdir/usr/share/plymouth/themes/rainbow-dash/"
+
+    install -m644 files/*.png \
+        "$pkgdir/usr/share/plymouth/themes/rainbow-dash-dark/"
+    install -m644 files/rainbow-dash-dark.plymouth files/rainbow-dash-dark.script \
+        "$pkgdir/usr/share/plymouth/themes/rainbow-dash-dark/"
+}

@@ -1,5 +1,5 @@
 # Rainbow Dash Boot Animation
-This is a plymouth theme featuring animation of rainbow dash flying. **This package is only for debian-based operating system**. Popular debian-based OS include but not limited to Debian, Ubuntu, Kali Linux, and Linux Mint. **Other operating system like Windows, iPhone and Android can't install this**.
+This is a plymouth theme featuring animation of rainbow dash flying. The prebuilt `.deb` package is for **debian-based operating systems** (Debian, Ubuntu, Kali Linux, Linux Mint and others). Arch Linux is supported through the [AUR-style packages](#arch-linux). **Non-Linux systems like Windows, iPhone and Android can't install this**.
 
 ## Download
 Open release section to [download](https://github.com/yeaayy/plymouth-theme-rainbow-dash/releases/latest).
@@ -65,6 +65,26 @@ choose  `/usr/share/plymouth/themes/rainbow-dash/rainbow-dash.plymouth` or choos
 ```sh
 sudo update-initramfs -c -k $(uname -r)
 ```
+
+## Arch Linux
+Arch Linux is supported through `makepkg` (AUR-style) packages. Two packages are provided:
+
+ - `plymouth-theme-rainbow-dash` — tracks the latest release.
+ - `plymouth-theme-rainbow-dash-git` — tracks the git repository.
+
+Build and install one locally from the project root:
+```sh
+cd plymouth-theme-rainbow-dash-git
+makepkg -si
+```
+Then select a theme. The `-R` flag rebuilds the initramfs:
+```sh
+sudo plymouth-set-default-theme -R rainbow-dash
+# or
+sudo plymouth-set-default-theme -R rainbow-dash-dark
+```
+
+Plymouth on Arch also requires the `plymouth` hook in `/etc/mkinitcpio.conf` and the `splash` kernel parameter. See the [Arch Wiki](https://wiki.archlinux.org/title/Plymouth) for details.
 
 ## Test
 This package is tested on:
