@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Rainbow Dash Dark
+Description=A theme that features an animated Rainbow Dash Flying, in dark mode.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/rainbow-dash-dark
+ScriptFile=/usr/share/plymouth/themes/rainbow-dash-dark/rainbow-dash-dark.script

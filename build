@@ -1,24 +1,31 @@
 #!/bin/bash
 
 VERSION=1.0.0
-TARGET="rainbow-dash/usr/share/plymouth/themes/rainbow-dash"
+PKG="rainbow-dash"
+THEMES="rainbow-dash rainbow-dash-dark"
 
-mkdir -p "$TARGET"
-mkdir rainbow-dash/DEBIAN
-for file in files/*.png
+rm -rf "$PKG"
+mkdir -p "$PKG/DEBIAN"
+
+for theme in $THEMES
 do
-    cp -t "$TARGET" "$file"
+    TARGET="$PKG/usr/share/plymouth/themes/$theme"
+    mkdir -p "$TARGET"
+    for file in files/*.png
+    do
+        cp -t "$TARGET" "$file"
+    done
+    cp "files/$theme.plymouth" "$TARGET/$theme.plymouth"
+    cp "files/$theme.script" "$TARGET/$theme.script"
 done
-cp "files/rainbow-dash.plymouth" "$TARGET/rainbow-dash.plymouth"
-cp "files/rainbow-dash.script" "$TARGET/rainbow-dash.script"
 
 for name in control postinst postrm
 do
-    cp -t "rainbow-dash/DEBIAN" "files/$name"
+    cp -t "$PKG/DEBIAN" "files/$name"
 done
 
-CONTROL=rainbow-dash/DEBIAN/control
-INSTALL_SIZE=$(du --exclude='rainbow-dash/DEBIAN/*' -bd1 rainbow-dash | sed -nEe 's,(^[0-9]+)\s+rainbow-dash$,\1,p')
+CONTROL="$PKG/DEBIAN/control"
+INSTALL_SIZE=$(du --exclude="$PKG/DEBIAN/*" -bd1 "$PKG" | sed -nEe "s,(^[0-9]+)\s+$PKG$,\1,p")
 sed -i -Ee "s,:VERSION:,${VERSION}," "$CONTROL"
 sed -i -Ee "s,:INSTALL_SIZE:,${INSTALL_SIZE}," "$CONTROL"
-dpkg-deb -b "rainbow-dash" "plymouth-theme-rainbow-dash_${VERSION}_all.deb"
+dpkg-deb -b "$PKG" "plymouth-theme-rainbow-dash_${VERSION}_all.deb"

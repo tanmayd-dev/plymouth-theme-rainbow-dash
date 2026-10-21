@@ -4,6 +4,20 @@ This is a plymouth theme featuring animation of rainbow dash flying. **This pack
 ## Download
 Open release section to [download](https://github.com/yeaayy/plymouth-theme-rainbow-dash/releases/latest).
 
+## Themes
+This package installs two themes:
+ - **Rainbow Dash Flying** (`rainbow-dash`) — light sky background. This is set as the default during installation.
+ - **Rainbow Dash Dark** (`rainbow-dash-dark`) — dark night-sky background.
+
+To switch to the dark theme run:
+```sh
+sudo plymouth-set-default-theme rainbow-dash-dark -R
+```
+To switch back to the light theme run:
+```sh
+sudo plymouth-set-default-theme rainbow-dash -R
+```
+
 ## Building
 Just run
 ```sh
