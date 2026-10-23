@@ -5,7 +5,7 @@ pkgver=r1.g653d8ba
 pkgrel=1
 pkgdesc='Animated Rainbow Dash flying Plymouth boot theme (light and dark variants) (git)'
 arch=('any')
-url='https://github.com/yeaayy/plymouth-theme-rainbow-dash'
+url='https://github.com/tanmayd-dev/plymouth-theme-rainbow-dash'
 license=('unknown')
 depends=('plymouth')
 makedepends=('git')
@@ -34,5 +34,11 @@ package() {
     install -m644 files/*.png \
         "$pkgdir/usr/share/plymouth/themes/rainbow-dash-dark/"
     install -m644 files/rainbow-dash-dark.plymouth files/rainbow-dash-dark.script \
+        "$pkgdir/usr/share/plymouth/themes/rainbow-dash-dark/"
+
+    # Splash BMP for the systemd-stub UKI (--splash in the mkinitcpio preset);
+    # installed to the theme dir because /usr/share/systemd/bootctl/ is owned
+    # by systemd and pacman would refuse to overwrite it.
+    install -m644 files/splash.bmp \
         "$pkgdir/usr/share/plymouth/themes/rainbow-dash-dark/"
 }

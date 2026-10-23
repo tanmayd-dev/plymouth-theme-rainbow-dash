@@ -86,6 +86,22 @@ sudo plymouth-set-default-theme -R rainbow-dash-dark
 
 Plymouth on Arch also requires the `plymouth` hook in `/etc/mkinitcpio.conf` and the `splash` kernel parameter. See the [Arch Wiki](https://wiki.archlinux.org/title/Plymouth) for details.
 
+### UKI (systemd-stub) splash
+
+For UKI boots the package ships a static splash BMP for systemd-stub at
+`/usr/share/plymouth/themes/rainbow-dash-dark/splash.bmp` (in the theme dir,
+not `/usr/share/systemd/bootctl/`, which pacman cannot own). Point the preset
+at it and rebuild the initramfs:
+
+```sh
+# /etc/mkinitcpio.preset
+default_options="--splash /usr/share/plymouth/themes/rainbow-dash-dark/splash.bmp"
+```
+
+The dark theme animates the hand-off from this splash: the wordmark fades out
+in place while the pony starts at the splash position and flies to the
+animation centre.
+
 ## Test
 This package is tested on:
  - Linux Mint
