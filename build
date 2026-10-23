@@ -19,6 +19,11 @@ do
     cp "files/$theme.script" "$TARGET/$theme.script"
 done
 
+# Splash BMP for the systemd-stub UKI, shown between firmware and Plymouth.
+# Deb systems may not boot UKIs, but the theme dir ships it for parity with
+# the Arch packages; /usr/share/systemd/bootctl/ is left to systemd itself.
+cp "files/splash.bmp" "$PKG/usr/share/plymouth/themes/rainbow-dash-dark/splash.bmp"
+
 for name in control postinst postrm
 do
     cp -t "$PKG/DEBIAN" "files/$name"
