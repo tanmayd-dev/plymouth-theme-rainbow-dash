@@ -9,27 +9,22 @@ PAD = 3;
 /* ----------------------- UKI splash hand-off -----------------------------
  * Must stay in sync with files/splash.bmp: a 566x167 systemd-stub BMP that
  * the stub draws centred at native size, holding this theme's pony (frame
- * 010 content, 236x136) at (9,15) and the wordmark (files/arch-wordmark.png,
- * 295x56) at (263,55).  Frame 010's content sits at (28,22) as 362x208
- * inside the 425x266 animation frame.
+ * 010 content, 236x136) at (9,15).
  *
- * On boot the stub splash vanishes the instant the theme takes over, so to
- * keep continuity the theme re-draws the wordmark at the splash position and
- * fades it out in place, while the pony starts exactly where the splash left
- * it and flies to the animation seat over FLY_DURATION seconds (ease-out),
- * growing from its splash size to the theme's native size.  The fly-in is
- * driven by Plymouth.SetRefreshFunction; the original progress callback is
- * kept as a no-op while the flight is in progress. */
+ * On boot the stub splash vanishes the instant the theme takes over; the
+ * wordmark is drawn only by the stub.  To keep continuity the pony starts
+ * exactly where the splash left it and flies to the animation seat over
+ * FLY_DURATION seconds (ease-out), growing from its splash size to the
+ * theme's native size.  The fly-in is driven by
+ * Plymouth.SetRefreshFunction; the original progress callback is kept as a
+ * no-op while the flight is in progress. */
 SPLASH_W = 566;
 SPLASH_H = 167;
 PONY_X = 9;
 PONY_Y = 15;
 PONY_W = 236;
 PONY_H = 136;
-WORDMARK_X = 263;
-WORDMARK_Y = 55;
 FLY_DURATION = 1.1;
-FADE_DURATION = 0.5;
 REFRESH_HZ = 50;
 FRAME_BBOX_X = 28;
 FRAME_BBOX_Y = 22;
@@ -78,21 +73,11 @@ FLY_Y_START = splashY + PONY_Y + PONY_H / 2 - (FRAME_BBOX_Y + FRAME_BBOX_H / 2) 
 
 global.flyDone = !bootMode;
 global.ticks = 0;
-global.wordmarkFaded = true;
-global.hasWordmark = false;
 
 if (bootMode) {
   /* Seat the pony at the exact splash anchor and start it at splash scale
    * before the first refresh, so the hand-off has no centred first-frame
-   * flash. HasWordmark enables the fade-out of the re-drawn splash wordmark. */
-  global.hasWordmark = true;
-  global.wordmarkFaded = false;
-  splashWordmark = Image("arch-wordmark.png");
-  splashWordmarkSprite = Sprite(splashWordmark);
-  splashWordmarkSprite.SetX(splashX + WORDMARK_X);
-  splashWordmarkSprite.SetY(splashY + WORDMARK_Y);
-  splashWordmarkSprite.SetZ(10);
-  splashWordmarkSprite.SetOpacity(1);
+   * flash. */
   animation.sprite.SetImage(animation[0].Scale(
       Math.Int(FRAME_W * FLY_SCALE_START), Math.Int(FRAME_H * FLY_SCALE_START)));
   animation.sprite.SetPosition(FLY_X_START, FLY_Y_START, 0);
@@ -185,18 +170,6 @@ Plymouth.SetQuitFunction(displayNormalLogoCallback);
 fun refreshCallback () {
   global.ticks = ticks + 1;
   t = ticks / REFRESH_HZ;
-
-  /* The re-drawn splash wordmark fades out in place regardless of dialog
-   * state, so it never lingers over the password field. */
-  if (global.hasWordmark && !global.wordmarkFaded) {
-    o = 1 - t / FADE_DURATION;
-    if (o <= 0) {
-      splashWordmarkSprite.SetOpacity(0);
-      global.wordmarkFaded = true;
-    } else {
-      splashWordmarkSprite.SetOpacity(o);
-    }
-  }
 
   if (global.status != "normal") return;
 
