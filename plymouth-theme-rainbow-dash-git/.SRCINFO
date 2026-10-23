@@ -10,7 +10,7 @@ pkgbase = plymouth-theme-rainbow-dash-git
 	depends = plymouth
 	provides = plymouth-theme-rainbow-dash
 	conflicts = plymouth-theme-rainbow-dash
-	source = plymouth-theme-rainbow-dash-git::git+https://github.com/tanmayd-dev/plymouth-theme-rainbow-dash.git
+	source = plymouth-theme-rainbow-dash-git::git+https://github.com/tanmayd-dev/plymouth-theme-rainbow-dash.git#branch=arch-support
 	sha256sums = SKIP
 
 pkgname = plymouth-theme-rainbow-dash-git

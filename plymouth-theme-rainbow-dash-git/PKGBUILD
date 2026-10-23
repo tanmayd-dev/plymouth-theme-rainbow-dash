@@ -12,7 +12,7 @@ makedepends=('git')
 provides=('plymouth-theme-rainbow-dash')
 conflicts=('plymouth-theme-rainbow-dash')
 install="$pkgname.install"
-source=("$pkgname::git+$url.git")
+source=("$pkgname::git+$url.git#branch=arch-support")
 sha256sums=('SKIP')
 
 pkgver() {
