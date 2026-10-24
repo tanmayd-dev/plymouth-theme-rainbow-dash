@@ -98,9 +98,10 @@ at it and rebuild the initramfs:
 default_options="--splash /usr/share/plymouth/themes/rainbow-dash-dark/splash.bmp"
 ```
 
-The dark theme animates the hand-off from this splash: the wordmark fades out
-in place while the pony starts at the splash position and flies to the
-animation centre.
+The dark theme keeps its usual behaviour; the splash BMP is purely for the
+UKI's static boot phase.  Both are shown in sequence with no scripted
+hand-off: the static pony lockup between firmware and Plymouth, then the
+animated theme at the centre.
 
 ## Test
 This package is tested on:

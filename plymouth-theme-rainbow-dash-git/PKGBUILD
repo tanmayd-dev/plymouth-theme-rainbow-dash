@@ -1,7 +1,7 @@
 # Maintainer: Tanmay Deshpande <work.tanmaydeshpande@gmail.com>
 
 pkgname=plymouth-theme-rainbow-dash-git
-pkgver=r9.6aa7d16
+pkgver=r10.eab6cc0
 pkgrel=1
 pkgdesc='Animated Rainbow Dash flying Plymouth boot theme (light and dark variants) (git)'
 arch=('any')
